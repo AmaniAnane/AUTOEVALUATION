@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add Categorie</title>
+</head>
+<body>
+
+<form th:action="@{/Categorie/save}" th:object="${Categorie}" method="POST">
+
+<p>Categorie<input type="text" th:field="*{nom_categorie}"/></p>
+
+<p><input type="submit" value="save"/></p>
+</form>
+</body>
+</html>
+
+
+
+

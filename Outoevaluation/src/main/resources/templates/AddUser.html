@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add User</title>
+</head>
+<body>
+<form th:action="@{/User/save}" th:object="${User}" method="POST">
+<p>nom<input type="text" th:field="*{nom_User}"/><span 
+th:errors="*{nom_User}"/></p>
+<p>prenom_User<input type="text" th:field="*{prenom_User}"/><span 
+th:errors="*{prenom_User}"/></p>
+
+
+<p>email_User<input type="email" th:field="*{email_User}"/><span 
+th:errors="*{email_User}"/></p>
+
+<p>Telephone<input type="tel" th:field="*{telephon}"/><span 
+th:errors="*{telephon}" placeholder="123-4567-8901" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required/></p>
+
+
+<p>login<input type="text" th:field="*{login_User}"/><span 
+th:errors="*{login_User}"/></p>
+
+<p>Administrateur  
+<input type="checkbox" id="admin" name="gender" value="1" th:field="*{admin}">
+</p>
+
+<p>Fonction
+ <select th:field="*{u.id_fonction}" >
+                      
+                      
+    
+                         <option th:each="f:${Fonction}"
+                            th:value="${f.id_fonction}"
+                            th:utext="${f.libelle}"/>
+                  </select><span 
+th:errors="*{u.id_fonction}"/></p>
+
+
+<p>mot de pass<input type="password" th:field="*{pass_User}"/><span 
+th:errors="*{pass_User}"/></p>
+ 
+ 
+<p> <input type="reset" value="Reset"><p> 
+<p><input type="submit" value="save"/></p>
+</form>
+</body>
+</html>
+
+
+
+

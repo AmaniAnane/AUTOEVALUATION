@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>listes des Questions</title>
+
+</head>
+<body>
+<table> 
+<tr>
+	<th>ID</th><th>position</th></tr>
+	<tr th:each="pk:${Questions}">
+	<td th:text="${pk.id}"/>
+	<td th:text="${pk.position}"/>
+	
+	<td>
+		<a th:href="@{/parking/update(num=${pk.id})}"th:text="Modifier"/>
+		
+	</td>
+	<td>
+		<a th:href="@{/parking/delete(num=${pk.id})}"th:text="Supprime"/>
+	</td>
+	</tr>
+</table>
+</body>
+</html>

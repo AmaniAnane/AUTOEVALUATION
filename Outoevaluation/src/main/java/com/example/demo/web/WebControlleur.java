@@ -1,5 +1,8 @@
 package com.example.demo.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 
@@ -12,13 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.dao.CategorieRespository;
-import com.example.demo.dao.PersonnelsRespository;
+
+import com.example.demo.dao.FonctionRespository;
+import com.example.demo.dao.UserRespository;
 
 import com.example.demo.dao.TypeRespository;
 import com.example.demo.dao.QuestionsRespository;
 import com.example.demo.entities.Categorie;
-
-import com.example.demo.entities.Personnels;
+import com.example.demo.entities.Fonction;
+import com.example.demo.entities.User;
 import com.example.demo.entities.Type;
 import com.example.demo.entities.Questions;
 
@@ -26,70 +31,131 @@ import com.example.demo.entities.Questions;
 public class WebControlleur {
 
 @Autowired
-private PersonnelsRespository PersonnelsRespository;
+private UserRespository UserRespository;
+
 @Autowired
+private FonctionRespository FonctionRespository;
+@Autowired
+
 private CategorieRespository CategorieRespository;
 @Autowired
 private TypeRespository TypeRespository;
 @Autowired
 private QuestionsRespository  questionsRespository;
+// User
 
-@RequestMapping("Personnels/add")
- public String AddPersonnels(Model model) {
-	 model.addAttribute("Personnels",new Personnels() );
-	 
-	 return "AddPersonnels";
+
+@RequestMapping(value = { "/User/add" }, method = RequestMethod.GET)
+
+ public String AddUser(Model model) {
+	 model.addAttribute("User",new User() );
+	
+  ArrayList<Fonction> Fonction = (ArrayList<Fonction>) FonctionRespository.findAll();
+  model.addAttribute("Fonction", Fonction);
+   
+	 return "AddUser";
 	 }
 	 
 
-	 @RequestMapping(value="Personnels/save", method=RequestMethod.POST)
-	 public String savePersonnels(@Valid @ModelAttribute Personnels p, BindingResult bindingResult) {
+	 @RequestMapping(value="User/save", method=RequestMethod.POST)
+	 public String saveUser(@Valid @ModelAttribute User p, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-		 return "AddPersonnels";
+		 return "AddUser";
 		 }
-		PersonnelsRespository.save(p);
+		UserRespository.save(p);
 		
-		return "redirect:/Personnels/lister";
+		return "redirect:/User/lister";
 	 
 	 }
 	 
-	 @RequestMapping("/Personnels/lister")
-	 public String listPersonnels(Model model)
+	 @RequestMapping("/User/lister")
+	 public String listUser(Model model)
 	 {
-		 model.addAttribute("Personnels", PersonnelsRespository.findAll());
-		 return "Personnels";
+		 model.addAttribute("User", UserRespository.findAll());
+		 
+		 return "User";
 	 }
 	 
 	 
-	 @RequestMapping("Personnels/update")
-	 public String modifPersonnels(Model model,int num) {
-		 Personnels p=PersonnelsRespository.findById(num).get();
-		 model.addAttribute("Personnels",p);
-		 return "modifPersonnels";
+	 @RequestMapping("User/update")
+	 public String modifUser(Model model,int num) {
+		 User p=UserRespository.findById(num).get();
+		 model.addAttribute("User",p);
+		 return "modifUser";
 	 }
-	 @RequestMapping(value="/Personnels/modifier",method=RequestMethod.POST)
-	 public String updatePersonnels(@Valid @ModelAttribute Personnels p,BindingResult bindingResult) {
+	 @RequestMapping(value="/User/modifier",method=RequestMethod.POST)
+	 public String updateUser(@Valid @ModelAttribute User p,BindingResult bindingResult) {
 		 if(bindingResult.hasErrors()) {
-			 return "modifPersonnels";
+			 return "modifUser";
 		 }
-		 PersonnelsRespository.saveAndFlush(p);
-		 return "redirect:/Personnels/lister";
+		 UserRespository.saveAndFlush(p);
+		 return "redirect:/User/lister";
 	 }
 	 
-	 
-	 
-	 
-	 @RequestMapping(value="/Personnels/delete",method=RequestMethod.GET)
-		public String deletePersonnels(Personnels p, int num) {
-		 PersonnelsRespository.deleteById(num);
+	 @RequestMapping(value="/User/delete",method=RequestMethod.GET)
+		public String deleteUser(User p, int num) {
+		 UserRespository.deleteById(num);
 			
-			return "redirect:/Personnels/lister";
+			return "redirect:/User/lister";
 		}
 	 
 	 
 	 
-	
 	 
+	 
+	 
+	 // Fonction 
+	 
+	
+	 @RequestMapping("Fonction/add")
+	 public String AddFonction(Model model) {
+		 model.addAttribute("Fonction",new Fonction() );
+		 
+		 return "AddFonction";
+		 }
+		 
+
+		 @RequestMapping(value="Fonction/save", method=RequestMethod.POST)
+		 public String saveFonction(@Valid @ModelAttribute Fonction p, BindingResult bindingResult) {
+			if (bindingResult.hasErrors()) {
+			 return "AddFonction";
+			 }
+			FonctionRespository.save(p);
+			
+			return "redirect:/Fonction/lister";
+		 
+		 }
+		 
+		 @RequestMapping("/Fonction/lister")
+		 public String listFonction(Model model)
+		 {
+			 model.addAttribute("Fonction", FonctionRespository.findAll());
+			 return "Fonction";
+		 }
+		 
+		 
+		 @RequestMapping("Fonction/update")
+		 public String modifFonction(Model model,int num) {
+			 Fonction p=FonctionRespository.findById(num).get();
+			 model.addAttribute("Fonction",p);
+			 return "modifFonction";
+		 }
+		 @RequestMapping(value="/Fonction/modifier",method=RequestMethod.POST)
+		 public String updateFonction(@Valid @ModelAttribute Fonction p,BindingResult bindingResult) {
+			 if(bindingResult.hasErrors()) {
+				 return "modifFonction";
+			 }
+			 FonctionRespository.saveAndFlush(p);
+			 return "redirect:/Fonction/lister";
+		 }
+		 
+		 @RequestMapping(value="/Fonction/delete",method=RequestMethod.GET)
+			public String deleteFonction(Fonction p, int num) {
+			 FonctionRespository.deleteById(num);
+				
+				return "redirect:/Fonction/lister";
+			}
+		 
 	 
 	 
 	 @RequestMapping("Categorie/add")

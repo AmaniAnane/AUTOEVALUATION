@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Update Agent</title>
+</head>
+<body>
+<form th:action="@{/Categorie/modifier}" th:object="${Categorie}" method="POST">
+<p> Id <input type="text" th:field="*{id_categorie}"/> <span th:errors="*{id_categorie}"/> </p>
+<p> Categorie <input type="text" th:field="*{nom_categorie}"/> <span th:errors="*{nom_categorie}"/> </p>
+
+<p> <input type="submit" value="Update"/> <p>
+</form>
+</body>
+</html>
+
+

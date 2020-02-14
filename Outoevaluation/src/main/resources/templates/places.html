@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>liste des places</title>
+
+</head>
+<body>
+<table> 
+<tr>
+	<th>ID</th><th>disponible</th></tr>
+	<tr th:each="p:${place}">
+	<td th:text="${p.id}"/>
+	<td th:text="${p.dispo}"/>
+	
+	<td>
+		<a th:href="@{/place/update(num=${p.id})}"th:text="Modifier"/>
+	</td>
+	
+	</tr>
+</table>
+</body>
+</html>

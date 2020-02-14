@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>add parking</title>
+</head>
+<body>
+<form th:action="@{/Questions/save}" th:object="${Questions}" method="POST">
+
+<p>position:<input type="text" th:field="*{position}"/><span 
+th:errors="*{position}"/></p>
+
+<p>position:<input type="text" th:field="*{position}"/><span 
+th:errors="*{position}"/></p>
+
+<p>position:<input type="text" th:field="*{position}"/><span 
+th:errors="*{position}"/></p>
+
+<p><input type="submit" value="save"/></p>
+</body>
+</html>
