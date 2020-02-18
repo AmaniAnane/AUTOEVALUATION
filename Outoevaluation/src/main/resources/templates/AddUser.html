@@ -2,10 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Add User</title>
+
+    <title>Ajouter User</title>
+  
 </head>
 <body>
+
+
 <form th:action="@{/User/save}" th:object="${User}" method="POST">
+
 <p>nom<input type="text" th:field="*{nom_User}"/><span 
 th:errors="*{nom_User}"/></p>
 <p>prenom_User<input type="text" th:field="*{prenom_User}"/><span 
@@ -42,8 +47,10 @@ th:errors="*{u.id_fonction}"/></p>
 th:errors="*{pass_User}"/></p>
  
  
-<p> <input type="reset" value="Reset"><p> 
-<p><input type="submit" value="save"/></p>
+
+<p><input type="submit" value="save"/> <input type="reset" value="Reset"></p>
+
+
 </form>
 </body>
 </html>

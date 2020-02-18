@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>update parking</title>
+<title>update Questions</title>
 </head>
 <body>
-<form th:action="@{/parking/modifier}" th:object="${parking}" method="POST">
-<p> Id <input type="text" th:field="*{id}"/> <span th:errors="*{id}"/> </p>
-<p> position <input type="text" th:field="*{position}"/> <span th:errors="*{position}"/> </p>
+<form th:action="@{/Questions/modifier}" th:object="${Questions}" method="POST">
+
+
+<p> libelle <input type="text" th:field="*{libelle}"/> <span th:errors="*{libelle}"/> </p>
 
 <p> <input type="submit" value="Update"/> <p>
 </form>

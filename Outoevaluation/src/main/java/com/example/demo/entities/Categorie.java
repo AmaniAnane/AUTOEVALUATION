@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,15 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class Categorie  {
+public class Categorie implements Serializable {
+	public Categorie() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	    public int id_categorie ;
@@ -20,13 +29,19 @@ public class Categorie  {
 	    
 	    @Override
 		public String toString() {
-			return "Categorie [id_categorie=" + id_categorie + ", nom_categorie=" + nom_categorie + "]";
+			return nom_categorie ;
 		}
 
 
-		public int getId_categorie() {
+	
+
+
+public int getId_categorie() {
 			return id_categorie;
 		}
+
+
+
 
 
 		public void setId_categorie(int id_categorie) {
@@ -34,15 +49,35 @@ public class Categorie  {
 		}
 
 
-	    
 
-public String getNom_categorie() {
+
+
+		public String getNom_categorie() {
 			return nom_categorie;
 		}
 
 
+
+
+
 		public void setNom_categorie(String nom_categorie) {
 			this.nom_categorie = nom_categorie;
+		}
+
+
+
+
+
+		public Set<Questions> getQuestions() {
+			return Questions;
+		}
+
+
+
+
+
+		public void setQuestions(Set<Questions> questions) {
+			Questions = questions;
 		}
 
 

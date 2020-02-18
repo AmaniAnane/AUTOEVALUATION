@@ -8,17 +8,17 @@
 <body>
 <table> 
 <tr>
-	<th>ID</th><th>position</th></tr>
-	<tr th:each="pk:${Questions}">
-	<td th:text="${pk.id}"/>
-	<td th:text="${pk.position}"/>
+	<th>ID</th><th>questions</th></tr>
+	<tr th:each="q:${Questions}">
+	<td th:text="${q.id_question}"/>
+	<td th:text="${q.libelle}"/>
 	
 	<td>
-		<a th:href="@{/parking/update(num=${pk.id})}"th:text="Modifier"/>
+		<a th:href="@{/Questions/update(num=${q.id_question})}"th:text="Modifier"/>
 		
 	</td>
 	<td>
-		<a th:href="@{/parking/delete(num=${pk.id})}"th:text="Supprime"/>
+		<a th:href="@{/Questions/delete(num=${q.id_question})}"th:text="Supprime"/>
 	</td>
 	</tr>
 </table>

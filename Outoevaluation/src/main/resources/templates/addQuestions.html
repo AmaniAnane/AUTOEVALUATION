@@ -1,21 +1,45 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>add parking</title>
+<title>add Question</title>
 </head>
 <body>
 <form th:action="@{/Questions/save}" th:object="${Questions}" method="POST">
+	   
+	  
+<p>libelle:<textarea th:field="*{libelle}" pattern="[a-z A-Z]*" >
+<span 
+th:errors="*{libelle}"/></textarea>  </p>
 
-<p>position:<input type="text" th:field="*{position}"/><span 
-th:errors="*{position}"/></p>
 
-<p>position:<input type="text" th:field="*{position}"/><span 
-th:errors="*{position}"/></p>
 
-<p>position:<input type="text" th:field="*{position}"/><span 
-th:errors="*{position}"/></p>
 
+
+<p>type de question
+ <select th:field="*{t.id_type}" >
+                      
+                      
+    
+                         <option th:each="t:${Type}"
+                            th:value="${t.id_type}"
+                            th:utext="${t.nom_type}"/>
+                  </select><span 
+th:errors="*{t.id_type}"/></p>
+
+<p>categorie de question
+
+ <select th:field="*{c.id_categorie}" >
+                      
+                      
+    
+                         <option th:each="c:${Categorie}"
+                            th:value="${c.id_categorie}"
+                            th:utext="${c.nom_categorie}"/>
+                  </select><span 
+th:errors="*{c.id_categorie}"/></p>
 <p><input type="submit" value="save"/></p>
 </body>
 </html>

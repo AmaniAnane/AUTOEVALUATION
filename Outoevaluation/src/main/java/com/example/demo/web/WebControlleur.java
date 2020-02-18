@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,7 +51,8 @@ private QuestionsRespository  questionsRespository;
 	
   ArrayList<Fonction> Fonction = (ArrayList<Fonction>) FonctionRespository.findAll();
   model.addAttribute("Fonction", Fonction);
-   
+ 
+  
 	 return "AddUser";
 	 }
 	 
@@ -271,35 +271,40 @@ private QuestionsRespository  questionsRespository;
 			 
 			 
 			 
-			 
 			
-			 
-			 
-			 
+					 
 			 //Questions
 			 
 				
-			 @RequestMapping("Questions/add")
+			 @RequestMapping(value= {"Questions/add"} ,  method = RequestMethod.GET)
 			 public String addQuestions(Model model) {
 				 model.addAttribute("Questions",new Questions() );
+				 
+				 
+				 ArrayList<Type> Type = (ArrayList<Type>) TypeRespository.findAll();
+				  model.addAttribute("Type", Type);
+				 
+				  
+				  ArrayList<Categorie> Categorie = (ArrayList<Categorie>) CategorieRespository.findAll();
+				  model.addAttribute("Categorie", Categorie);
 				 
 				 return "addQuestions";
 				 }
 				 
 
 				 @RequestMapping(value="Questions/save", method=RequestMethod.POST)
-				 public String saveQuestions(@Valid @ModelAttribute Questions pk, BindingResult bindingResult) {
+				 public String saveQuestions(@Valid @ModelAttribute Questions q, BindingResult bindingResult) {
 					if (bindingResult.hasErrors()) {
 					 return "addQuestions";
 					 }
-					questionsRespository.save(pk);
+					questionsRespository.save(q);
 					
 					return "redirect:/Questions/lister";
 				 
 				 }
 				 
 				 @RequestMapping("/Questions/lister")
-				 public String listQuestion(Model model)
+				 public String listQuestions(Model model)
 				 {
 					 model.addAttribute("Questions", questionsRespository.findAll());
 					 return "Questions";
@@ -308,21 +313,21 @@ private QuestionsRespository  questionsRespository;
 				
 				 @RequestMapping("Questions/update")
 				 public String modifQuestions(Model model,int num) {
-					 Questions pk=questionsRespository.findById(num).get();
-					 model.addAttribute("Questions",pk);
+					 Questions q=questionsRespository.findById(num).get();
+					 model.addAttribute("Questions",q);
 					 return "modifQuestions";
 				 }
 				 @RequestMapping(value="/Questions/modifier",method=RequestMethod.POST)
-				 public String updateQuestions(@Valid @ModelAttribute Questions pk,BindingResult bindingResult) {
+				 public String updateQuestions(@Valid @ModelAttribute Questions q,BindingResult bindingResult) {
 					 if(bindingResult.hasErrors()) {
 						 return "modifQuestions";
 					 }
-					 questionsRespository.saveAndFlush(pk);
+					 questionsRespository.saveAndFlush(q);
 					 return "redirect:/Questions/lister";
 				 }
 				 
 				 @RequestMapping(value="/Questions/delete",method=RequestMethod.GET)
-					public String deleteQuestions(Questions pk, int num) {
+					public String deleteQuestions(Questions q, int num) {
 					 questionsRespository.deleteById(num);
 						
 						return "redirect:/Questions/lister";

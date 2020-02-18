@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
-
 @Entity
 public class User implements Serializable{
 
@@ -22,21 +20,22 @@ public class User implements Serializable{
 	   
 	
 	private int id_User ;
+	
+	
 	private String nom_User;
-	private String prenom_User;
-	private String email_User;
-	private int telephon;
-	private int Admin=0;
-	public int getAdmin() {
-		return Admin;
-	}
 
-	public void setAdmin(int admin) {
-		Admin = admin;
-	}
+	private String prenom_User;
+	
+	private String email_User;
+
+	private int telephon;
+
+	private int Admin=0;
 
 	private String login_User;
+	
 	private String pass_User;
+	
 	
 	
 
@@ -106,6 +105,18 @@ public class User implements Serializable{
 			this.telephon = telephon;
 		}
 
+		
+		
+		public int getAdmin() {
+			return Admin;
+		}
+
+		public void setAdmin(int admin) {
+			Admin = admin;
+		}
+
+		
+		
 		@ManyToOne
 		@JoinColumn(name="id_fonction")
 	    private Fonction u;
