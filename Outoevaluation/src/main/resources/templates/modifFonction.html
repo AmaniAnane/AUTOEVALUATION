@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Update place</title>
+</head>
+<body>
+<form th:action="@{/Fonction/modifier}" th:object="${Fonction}" method="POST">
+<p> Id <input type="text" th:field="*{id_fonction}"/> <span th:errors="*{id_fonction}"/> </p>
+<p> libelle <input type="text" th:field="*{libelle}"/> <span th:errors="*{libelle}"/> </p>
+<p> <input type="submit" value="Update"/> <p>
+</form>
+</body>
+</html>

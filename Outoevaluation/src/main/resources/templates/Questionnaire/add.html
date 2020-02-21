@@ -1,0 +1,25 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>add Questionnaire</title>
+</head>
+<body>
+<form th:action="@{save}" th:object="${Questionnaire}"  method="POST">
+	      
+<div class="form-group">
+<p>Date:<input type="date" th:field="*{date}"  >
+<span 
+th:errors="*{date}"/></input>  </p>
+
+<p>titre:<input type="text" th:field="*{titre}"  >
+<span 
+th:errors="*{titre}"/></input>  </p>
+</div>
+
+
+<p><input type="submit" value="Create Questionnaire"/></p>
+</body>
+</html>

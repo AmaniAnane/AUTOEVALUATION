@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>liste des fonctions</title>
+
+</head>
+<body>
+<table> 
+<tr>
+	<th>ID</th><th>libelle</th></tr>
+	<tr th:each="p:${Fonction}">
+	<td th:text="${p.id_fonction}"/>
+	<td th:text="${p.libelle}"/>
+	
+	<td>
+		<a th:href="@{/Fonction/update(num=${p.id_fonction})}"th:text="Modifier"/>
+	</td>
+		<td>
+		<a th:href="@{/Fonction/delete(num=${p.id_fonction})}" th:text="Supprimer"/>
+	</td>
+	</tr>
+</table>
+</body>
+</html>

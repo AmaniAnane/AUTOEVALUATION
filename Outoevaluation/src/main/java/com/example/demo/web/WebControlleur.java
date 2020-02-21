@@ -2,7 +2,9 @@ package com.example.demo.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import javax.persistence.criteria.From;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +12,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.dao.CategorieRespository;
 
 import com.example.demo.dao.FonctionRespository;
+import com.example.demo.dao.QuestionnaireRespository;
 import com.example.demo.dao.UserRespository;
 
 import com.example.demo.dao.TypeRespository;
 import com.example.demo.dao.QuestionsRespository;
+import com.example.demo.entities.AddQuestionnaireQuesFrom;
 import com.example.demo.entities.Categorie;
 import com.example.demo.entities.Fonction;
+import com.example.demo.entities.Questionnaire;
 import com.example.demo.entities.User;
 import com.example.demo.entities.Type;
 import com.example.demo.entities.Questions;
@@ -41,6 +47,8 @@ private CategorieRespository CategorieRespository;
 private TypeRespository TypeRespository;
 @Autowired
 private QuestionsRespository  questionsRespository;
+@Autowired
+private QuestionnaireRespository QuestionnaireRespository;
 // User
 
 
@@ -91,6 +99,8 @@ private QuestionsRespository  questionsRespository;
 		 UserRespository.saveAndFlush(p);
 		 return "redirect:/User/lister";
 	 }
+	 
+	 
 	 
 	 @RequestMapping(value="/User/delete",method=RequestMethod.GET)
 		public String deleteUser(User p, int num) {
@@ -333,8 +343,10 @@ private QuestionsRespository  questionsRespository;
 						return "redirect:/Questions/lister";
 					}
 			 
-			 
-		
+
+				 
+}		 
+				
+				 
 				 
 
-}

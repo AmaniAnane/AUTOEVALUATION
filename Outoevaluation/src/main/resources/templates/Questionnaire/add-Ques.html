@@ -1,0 +1,27 @@
+
+
+<<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>add Questionnaire</title>
+</head>
+<body>
+<form  th:object="${from}" method="POST" action ="/Questionnaire/add-Ques">
+	      
+<div class="form-group">
+<label th:for="OuestionsId"  >Questions</label>
+<select name="OuestionsId">
+<option th:each="Ouestions : *{Ouestions}"
+         th:text="${Ouestions.libelle}"
+         th:value="${Ouestions.id_question}"></option>
+</select>
+
+</div>
+
+
+<input type="hidden" name="QuestionnaireId" th:value="*{Ouestions.id_question}"/>
+<input type="submit" value="Add Ouestions">
+</form>
+</body>
+</html>

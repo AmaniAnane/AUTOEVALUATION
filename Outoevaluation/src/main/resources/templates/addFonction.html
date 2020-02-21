@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>add place</title>
+</head>
+<body>
+
+<form th:action="@{/Fonction/save}" th:object="${Fonction}" method="POST">
+<p>libelle:<input type="text" th:field="*{libelle}"/><span 
+th:errors="*{libelle}"/></p>
+
+<p><input type="submit" value="save"/></p>
+</body>
+</html>

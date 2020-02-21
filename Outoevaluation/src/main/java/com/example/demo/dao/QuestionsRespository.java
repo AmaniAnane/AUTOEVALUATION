@@ -12,6 +12,9 @@ import com.example.demo.entities.Questions;
 
 public interface QuestionsRespository extends JpaRepository<Questions, Integer> {
 
+
+
+	
 	//void save(@Valid Place pk);
 
 	//@Temporal(DATE)
