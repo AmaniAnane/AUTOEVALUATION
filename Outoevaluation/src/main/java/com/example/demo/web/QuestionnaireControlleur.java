@@ -20,6 +20,7 @@ import com.example.demo.entities.Categorie;
 import com.example.demo.entities.Fonction;
 import com.example.demo.entities.Questionnaire;
 import com.example.demo.entities.Questions;
+import com.example.demo.entities.Type;
 
 @Controller
 @RequestMapping(value="Questionnaire")
@@ -48,27 +49,7 @@ public class QuestionnaireControlleur {
 						
 						 return "Questionnaire/add";
 						 }
-					 /*
-					 
-					 @RequestMapping("Categorie/add")
-					 public String AddCategorie(Model model) {
-						 model.addAttribute("Categorie",new Categorie() );
-						 
-						 return "AddCategorie";
-						 }
-						 
-				  
-					 
-						 @RequestMapping(value="Categorie/save", method=RequestMethod.POST)
-						 public String saveCategorie(@Valid @ModelAttribute Categorie a, BindingResult bindingResult) {
-							if (bindingResult.hasErrors()) {
-							 return "AddCategorie";
-							 }
-							CategorieRespository.save(a);
-							
-							return "redirect:/Categorie/lister";
-						 
-						 }*/
+			
 	
 					 @RequestMapping(value="save", method=RequestMethod.POST)
 					 public String add(@Valid @ModelAttribute Questionnaire Questionnaire, BindingResult bindingResult) {
@@ -83,7 +64,7 @@ public class QuestionnaireControlleur {
 					 }
 					 
 					 
-					 
+					
 					 
 					 
 					 @RequestMapping(value= "view/{QuestionnaireId}" ,  method = RequestMethod.GET)
@@ -93,7 +74,14 @@ public class QuestionnaireControlleur {
 					 model.addAttribute("Questionnaire",QuestionnaireRespository.findAll());
 					 model.addAttribute("Questions",Questionnaire.getQuestions());
 					 model.addAttribute("QuestionnaireId",Questionnaire.getId_questionnaire());
-					 
+					 ArrayList<Questions>Question= (ArrayList<Questions>) questionsRespository.findAll();
+					  model.addAttribute("Q", Question );
+						
+							AddQuestionnaireQuesFrom from = new AddQuestionnaireQuesFrom(
+									questionsRespository.findAll(),Questionnaire);
+							
+							model.addAttribute("from", from);
+							
 					 return"Questionnaire/view";
 					 }
 					 
@@ -102,24 +90,46 @@ public class QuestionnaireControlleur {
 					 
 					 
 					 
-					 
-					 @RequestMapping(value ="add-Ques/{QuestionnaireId}" ,  method = RequestMethod.GET)
+					 @RequestMapping(value ="/add-Ques/{QuestionnaireId}" ,  method = RequestMethod.GET)
 					 
 					 public String addQues(Model model,@PathVariable int QuestionnaireId) {
+						
+						 ArrayList<Questions>Questions= (ArrayList<Questions>) questionsRespository.findAll();
+						  model.addAttribute("Q", Questions );
+						 
 						 Questionnaire Questionnaire=QuestionnaireRespository.findById(QuestionnaireId).get();
 					AddQuestionnaireQuesFrom from = new AddQuestionnaireQuesFrom(
 							questionsRespository.findAll(),Questionnaire);
 					
-					model.addAttribute("Questionnaire",QuestionnaireRespository.findAll());
-					model.addAttribute("form", from);
+					model.addAttribute("from", from);
 					
 						 return"Questionnaire/add-Ques";
+						 
+						 
 						 }
-	 @RequestMapping(value ="add-Ques" ,  method = RequestMethod.POST)
+					 
+					 @RequestMapping(value ="/from/save" ,  method = RequestMethod.POST)
+					 
+					 public String AddQuestionnaireQuesFrom(Model model,@Valid @ModelAttribute AddQuestionnaireQuesFrom AddQuestionnaireQuesFrom, BindingResult bindingResult) {
+						 if (bindingResult.hasErrors()) {
+								model.addAttribute("AddQuestionnaireQuesFrom",AddQuestionnaireQuesFrom); 
+							 return "Questionnaire/view";
+							 }
+							Questions theQuestion= questionsRespository.findById(AddQuestionnaireQuesFrom.getQuestionsId()).get();
+							Questionnaire theQuestionnaire=QuestionnaireRespository.findById(AddQuestionnaireQuesFrom.getQuestionnaireId()).get();
+							 theQuestionnaire.addQues(theQuestion);
+							QuestionnaireRespository.save(theQuestionnaire);
+							
+							 return"redirect:/Questionnaire/view"+theQuestionnaire.getId_questionnaire();
+						 }
+					 
+	/* @RequestMapping(value ="/from/save" ,  method = RequestMethod.POST)
 					 
 	 
-	 public String addQues(@Valid @ModelAttribute AddQuestionnaireQuesFrom from, BindingResult bindingResult) {
+	 public String addQues(Model model,@Valid @ModelAttribute AddQuestionnaireQuesFrom from, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("form",from);
+			
 		 return "Questionnaire/add-Ques";
 		 
 		}
@@ -130,7 +140,31 @@ public class QuestionnaireControlleur {
 		 QuestionnaireRespository.save(theQuestionnaire);
 		 return"redirect:/Questionnaire/view"+theQuestionnaire.getId_questionnaire();
 	 }
-
+*/
+					 /*
 	
+	 @RequestMapping(value="addQQ", method=RequestMethod.POST)
+	 public String addQQ(Model model,@Valid @ModelAttribute AddQuestionnaireQuesFrom from, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("from",from); 
+		 return "Questionnaire/view";
+		 }
+		Questions theQuestion= questionsRespository.findById(from.getQuestionsId()).get();
+		Questionnaire theQuestionnaire=QuestionnaireRespository.findById(from.getQuestionnaireId()).get();
+		 theQuestionnaire.addQues(theQuestion);
+		QuestionnaireRespository.save(theQuestionnaire);
+		
+		 return"redirect:/Questionnaire/view"+theQuestionnaire.getId_questionnaire();
+	 */
 	
+	 /* @RequestMapping(value="addQQ"  ,  method = RequestMethod.GET)
+	 public String add(Model model) {
+		
+		 model.addAttribute("Questionnaire",new Questionnaire() );
+		
+		 return "Questionnaire/add";
+		 }*/
+	 
+	 
+	 
 }

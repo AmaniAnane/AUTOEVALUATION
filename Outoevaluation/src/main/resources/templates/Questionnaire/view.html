@@ -11,7 +11,22 @@
 <ul><li th:each="Questions:${Questions}" th:text="${Questions.libelle}"> </li>
 </ul> 
 <p th:unless="${Questions.size()}"><i>NO questions yet</i></p>
-<p><a th:href="'Questionnaire/add-Ques/'+${QuestionnaireId}">Add Question</a></p>
+<p><a th:href="'Questionnaire/add-Ques/' + ${QuestionnaireId}">Add Question</a></p>
 
+ <form th:action="@{/from/save}"  method="POST">    
+<div class="form-group">
+<label th:for="QuestionsId"  >Questions</label>
+<select name="QuestionsId">
+<option th:each="Questions: *{Q}"
+         th:text="${Questions.libelle}"
+         th:value="${Questions.id_question}" ></option>
+</select>
+
+</div>
+
+
+<input type="hidden" name="QuestionnaireId" />
+<input type="submit" value="Add Ouestions">
+</form>
 </body>
 </html>

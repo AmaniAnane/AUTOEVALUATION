@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 @Entity
@@ -56,7 +57,9 @@ public class Questionnaire implements Serializable{
 		this.date = date;
 	}
 	public  void addQues(Questions Ques) {Questions.add(Ques);}
+	
 	@ManyToMany(mappedBy="Questionnaire")
+
 	private Set <User>User;
 	
 	

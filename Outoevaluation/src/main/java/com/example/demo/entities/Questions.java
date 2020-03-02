@@ -32,7 +32,14 @@ public class Questions implements Serializable{
 	
 	  public String libelle;
 	
-	  private Date date;
+	  public Set<Questionnaire> getQuestionnaire() {
+		return Questionnaire;
+	}
+
+	public void setQuestionnaire(Set<Questionnaire> questionnaire) {
+		Questionnaire = questionnaire;
+	}
+	private Date date;
 /*	@Temporal(DATE)
 	@DateTimeFormat (pattern="dd-MMM-YYYY")
 	

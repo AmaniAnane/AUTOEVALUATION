@@ -57,7 +57,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
+<dependency>
         <groupId>commons-validator</groupId>
         <artifactId>commons-validator</artifactId>
         <version>1.6</version>
@@ -66,13 +66,13 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+	<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			
-			<plugin>
+<plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-checkstyle-plugin</artifactId>
     <version>2.17</version>

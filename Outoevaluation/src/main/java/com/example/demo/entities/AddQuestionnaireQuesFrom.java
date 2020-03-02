@@ -1,18 +1,18 @@
 package com.example.demo.entities;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class AddQuestionnaireQuesFrom {
-private int QuestionnaireId;
-private int OuestionsId;
-private Iterable<Questions> Questions;
-private Questionnaire Questionnaire;
+	public int QuestionnaireId;
+public int QuestionsId;
+
+public Iterable<Questions> Questions;
+public Questionnaire Questionnaire;
 public AddQuestionnaireQuesFrom(Iterable<com.example.demo.entities.Questions> questions,
 		com.example.demo.entities.Questionnaire questionnaire) {
 	
-	
-	Questions = questions;
-	Questionnaire = questionnaire;
-}
-public AddQuestionnaireQuesFrom() {
+
 
 }
 public int getQuestionnaireId() {
@@ -21,11 +21,11 @@ public int getQuestionnaireId() {
 public void setQuestionnaireId(int questionnaireId) {
 	QuestionnaireId = questionnaireId;
 }
-public int getOuestionsId() {
-	return OuestionsId;
+public int getQuestionsId() {
+	return QuestionsId;
 }
-public void setOuestionsId(int ouestionsId) {
-	OuestionsId = ouestionsId;
+public void setQuestionsId(int questionsId) {
+	QuestionsId = questionsId;
 }
 public Iterable<Questions> getQuestions() {
 	return Questions;
@@ -38,6 +38,4 @@ public Questionnaire getQuestionnaire() {
 }
 public void setQuestionnaire(Questionnaire questionnaire) {
 	Questionnaire = questionnaire;
-}
-
-}
+}}
