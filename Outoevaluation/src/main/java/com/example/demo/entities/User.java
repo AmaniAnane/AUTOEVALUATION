@@ -121,9 +121,18 @@ public class User implements Serializable{
 			Admin = admin;
 		}
 
+		public Set<Questionnaire> getQuestionnaires() {
+			return Questionnaires;
+		}
+
+		public void setQuestionnaires(Set<Questionnaire> questionnaires) {
+			Questionnaires = questionnaires;
+		}
+
 		@ManyToMany(cascade = CascadeType.ALL)
 		@JoinTable(name="affictation_user")
-		private Set<Questionnaire> Questionnaire;
+		private Set<Questionnaire> Questionnaires=new HashSet<Questionnaire>(0);
+		
 		
 		
 		@ManyToOne
@@ -142,13 +151,22 @@ public class User implements Serializable{
 		public void setU(Fonction u) {
 			this.u = u;
 		}
+
+		public boolean hasQuestionnaire(Questionnaire questionnaire) {
+			for (Questionnaire UserQuestionnaire: getQuestionnaires()) {
+				if (UserQuestionnaire.getId_questionnaire() == questionnaire.getId_questionnaire()) {
+					return true;
+				}
+			}
+			return false;
+		}
 		
 
 		
 
 
 
-
+		
 
 		
 
@@ -158,26 +176,6 @@ public class User implements Serializable{
 
 
 
-		/*public int getid() {
-			return id_User;
-		}
-		public void setNum_cin(int num_cin, int id) {
-			this.id = id;
-		}
-		public String getMatricule() {
-			return matricule;
-		}
-		public void setMatricule(String matricule) {
-			this.matricule = matricule;
-		}
-		public int getTel() {
-			return tel;
-		}
-		public void setTel(int tel) {
-			this.tel = tel;
-		}
-	    
-		public void reserver() {}*/
 		
 	    
 	    

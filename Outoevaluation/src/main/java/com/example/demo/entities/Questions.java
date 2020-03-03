@@ -93,8 +93,7 @@ public class Questions implements Serializable{
 		public void setT(Type t) {
 			this.t = t;
 		}
-		@ManyToMany(cascade = CascadeType.ALL)
-		@JoinTable(name="affictation_Questions")
+		@ManyToMany(mappedBy="Questionss")
 		private Set<Questionnaire> Questionnaire;
 
 		@ManyToOne

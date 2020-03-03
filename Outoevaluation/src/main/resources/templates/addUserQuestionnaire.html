@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Developer</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{../css/bootstrap.min.css}" />	
+</head>
+<body>
+	<h1>Add course</h1>
+	
+    		
+	<form th:action="@{/User/{id}/Questionnaires(id=${User.id_User)}" method="get" enctype="multipart/form-data" >
+	<div class="col-md-4">
+		<div class="panel panel-default">
+		 <div class="panel-heading">Student info</div>
+		 <div class="panel-body" style="padding-left: 5px;">
+			Nom: <b th:text="${User.nom_User}" /> <br/>
+		
+			
+			<br/>Questionnaire:
+				<span th:each="Questions : ${User.Questionnaires}">
+					<br/>&nbsp;&nbsp;<span th:text="${Questionnaires.titre}" />
+				</span>
+				<br/>
+				</div>
+		</div>	
+			<div class="col-md-6">
+			<select class="form-control" name="QuestionnaireId">
+				<option th:each="Questionnaire : ${Questionnaires}" 
+					th:value="${Questionnaire.id_questionnaire}" 
+					th:text="${Questionnaire.titre}">Questionnaire</option>
+			</select>
+			</div>
+			<input type="submit" class="btn btn-success" value="Add Questionnaire"/>
+	</div>
+	</form>
+</body>
+</html>

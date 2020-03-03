@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dao.CategorieRespository;
 
@@ -29,6 +31,9 @@ import com.example.demo.entities.Categorie;
 import com.example.demo.entities.Fonction;
 import com.example.demo.entities.Questionnaire;
 import com.example.demo.entities.User;
+
+
+
 import com.example.demo.entities.Type;
 import com.example.demo.entities.Questions;
 
@@ -344,6 +349,121 @@ private QuestionnaireRespository QuestionnaireRespository;
 					}
 			 
 
+				 
+				 //QuestionnaireQuestions
+				 
+				 @RequestMapping("/Questionnaire")
+					public String index(Model model) {
+						List<Questionnaire> Questionnaire = (List<Questionnaire>) QuestionnaireRespository.findAll();
+						model.addAttribute("Questionnaire", Questionnaire);
+				    	return "Questionnaires";
+				    }
+
+				    @RequestMapping(value = "add")
+				    public String addStudent(Model model){
+				    	model.addAttribute("Questionnaire", new Questionnaire());
+				        return "addQuestionnaire";
+				    }	
+					
+				    @RequestMapping(value = "save", method = RequestMethod.POST)
+				    public String save(Questionnaire Questionnaire){
+				    	QuestionnaireRespository.save(Questionnaire);
+				    	return "redirect:/Questionnaire";
+				    }
+				    
+				    @RequestMapping(value = "/delete/{id_questionnaire}", method = RequestMethod.GET)
+				    public String editRemoveEmployee(@PathVariable("id_questionnaire") int questionnaireId, Model model) {
+				    	QuestionnaireRespository.deleteById(questionnaireId);
+				        return "redirect:/Questionnaire";
+				    }    
+				 
+				 
+				 
+				 @RequestMapping(value = "addQuestionnaireQuestions/{id}", method = RequestMethod.GET)
+				    public String addQuestions(@PathVariable("id") int questionnaireId, Model model){
+				    	model.addAttribute("Questionss", questionsRespository.findAll());
+				    
+						model.addAttribute("Questionnaire", QuestionnaireRespository.findById(questionnaireId).get());
+				    	return "addQuestionnaireQuestions";
+				    }
+				    
+				    
+				    @RequestMapping(value="/Questionnaire/{id}/Questionss", method=RequestMethod.GET)
+					public String QuestionnairesAddQuestions(@PathVariable int id, @RequestParam int QuestionsId, Model model) {
+				    	Questions Questions = questionsRespository.findById(QuestionsId).get();
+						Questionnaire Questionnaire = QuestionnaireRespository.findById(id).get();
+
+						if (Questionnaire != null) {
+							if (!Questionnaire.hasQuestions(Questions)) {
+								Questionnaire.getQuestionss().add(Questions);
+							}
+							QuestionnaireRespository.save(Questionnaire);
+							model.addAttribute("Questionnaire", QuestionnaireRespository.findById(id));
+							model.addAttribute("Questionss", questionsRespository.findAll());
+							return "redirect:/Questionnaire";
+						}
+
+						return "redirect:/Questionnaire";
+					}    
+				    
+				    @RequestMapping(value = "getQuestionnaire", method = RequestMethod.GET)
+				    public @ResponseBody List<Questionnaire> getQuestionnaire() {
+				            return (List<Questionnaire>)QuestionnaireRespository.findAll();
+				    }      
+				 
+				 
+				 
+		//UserQuestionnaire
+				 
+				 
+				    @RequestMapping("/affUser")
+					public String affUser(Model model) {
+						List<User> User = (List<User>) UserRespository.findAll();
+						model.addAttribute("User", User);
+				    	return "affUser";
+				    }
+
+				  
+	
+				 
+				 
+				 @RequestMapping(value = "addUserQuestionnaire/{id}", method = RequestMethod.GET)
+				    public String addQuestionnaires(@PathVariable("id") int UserId, Model model){
+				    	model.addAttribute("Questionnaires", QuestionnaireRespository.findAll());
+				    
+						model.addAttribute("User", UserRespository.findById(UserId).get());
+				    	return "addUserQuestionnaire";
+				    }
+				    
+				    
+				    @RequestMapping(value="/User/{id}/Questionnaires", method=RequestMethod.GET)
+					public String UsersAddQuestionnaires(@PathVariable int id, @RequestParam int QuestionnaireId, Model model) {
+				    	Questionnaire Questionnaire = QuestionnaireRespository.findById(QuestionnaireId).get();
+				    	User User = UserRespository.findById(id).get();
+
+						if (User != null) {
+							if (!User.hasQuestionnaire(Questionnaire)) {
+								User.getQuestionnaires().add(Questionnaire);
+							}
+							UserRespository.save(User);
+							model.addAttribute("User", UserRespository.findById(id));
+							model.addAttribute("Questionnaires", QuestionnaireRespository.findAll());
+							return "redirect:/affUser";
+						}
+
+						return "redirect:/affUser";
+					}    
+				    
+				    @RequestMapping(value = "getUser", method = RequestMethod.GET)
+				    public @ResponseBody List<User> getUser() {
+				            return (List<User>)UserRespository.findAll();
+				    }      
+				    
+				    
+				    
+				    
+				 
+				 
 				 
 }		 
 				

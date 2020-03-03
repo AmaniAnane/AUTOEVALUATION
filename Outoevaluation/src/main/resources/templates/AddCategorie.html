@@ -3,15 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Add Categorie</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{static/css/bootstrap.min.css}" />
 </head>
+
 <body>
 
+<div class="col-md-4">
 <form th:action="@{/Categorie/save}" th:object="${Categorie}" method="POST">
 
-<p>Categorie<input type="text" th:field="*{nom_categorie}"/></p>
-
-<p><input type="submit" value="save"/></p>
+<p>Categorie<input type="text" th:field="*{nom_categorie}" class="form-control"/></p>
+<div style="clear: both; display: block; height: 10px;"></div>
+<p><input type="submit" value="save" class="form-control"/></p>
+<div style="clear: both; display: block; height: 10px;"></div>
 </form>
+</div>
 </body>
 </html>
 

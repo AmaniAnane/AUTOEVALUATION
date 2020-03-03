@@ -1,5 +1,5 @@
 package com.example.demo.web;
-
+/*
 import java.util.ArrayList;
 
 import javax.validation.Valid;
@@ -74,13 +74,13 @@ public class QuestionnaireControlleur {
 					 model.addAttribute("Questionnaire",QuestionnaireRespository.findAll());
 					 model.addAttribute("Questions",Questionnaire.getQuestions());
 					 model.addAttribute("QuestionnaireId",Questionnaire.getId_questionnaire());
-					 ArrayList<Questions>Question= (ArrayList<Questions>) questionsRespository.findAll();
+					 ArrayList<Questions> Question= (ArrayList<Questions>) questionsRespository.findAll();
 					  model.addAttribute("Q", Question );
 						
-							AddQuestionnaireQuesFrom from = new AddQuestionnaireQuesFrom(
+							AddQuestionnaireQuesFrom AddQuestionnaireQuesFrom = new AddQuestionnaireQuesFrom(
 									questionsRespository.findAll(),Questionnaire);
 							
-							model.addAttribute("from", from);
+							model.addAttribute("AddQuestionnaireQuesFrom", AddQuestionnaireQuesFrom);
 							
 					 return"Questionnaire/view";
 					 }
@@ -167,4 +167,3 @@ public class QuestionnaireControlleur {
 	 
 	 
 	 
-}
