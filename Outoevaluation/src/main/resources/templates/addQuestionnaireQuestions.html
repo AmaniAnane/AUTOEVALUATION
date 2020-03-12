@@ -24,15 +24,42 @@
 				<br/>
 				</div>
 		</div>	
+			
+			
+			
 			<div class="col-md-6">
-			<select class="form-control" name="QuestionsId">
-				<option th:each="Questions : ${Questionss}" 
-					th:value="${Questions.id_question}" 
-					th:text="${Questions.libelle}">Questions</option>
-			</select>
+			<table>
+			<tr>
+			<th></th><th> id-Questions</th><th> Questions</th><th>Categories-Questions</th>
+			</tr>
+			<tr th:each="Questions : ${Questionss}">
+			<td><input class="form-control" type="radio" name="QuestionsId" th:value="${Questions.id_question}"/></td>
+			<td th:text="${Questions.id_question}"/>
+			<td th:text="${Questions.libelle}"/>
+			<span th:each="Categorie: ${Questions.getC()}">
+			<td th:text="${Categorie.nom_categorie}"/>
+			
+			</table>
+			
+					
 			</div>
+			
+			
+			
+			
+			
+			
 			<input type="submit" class="btn btn-success" value="Add Questions"/>
 	</div>
 	</form>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>

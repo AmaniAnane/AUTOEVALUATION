@@ -5,22 +5,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
 
 
@@ -104,7 +96,18 @@ public class Questions implements Serializable{
 		@JoinColumn(name="id_type")
 	    private Type t;
 		
-		
-		
 
+
+@OneToMany(mappedBy="ch")
+private Set<Choixreponse>Choixreponse =new 	HashSet<Choixreponse>();
+
+
+public Set<Choixreponse> getChoixreponse() {
+	return Choixreponse;
+}
+
+public void setChoixreponse(Set<Choixreponse> choixreponse) {
+	Choixreponse = choixreponse;
+}
+			
 }

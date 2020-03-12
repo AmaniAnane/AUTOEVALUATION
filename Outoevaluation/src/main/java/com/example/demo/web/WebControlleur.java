@@ -18,16 +18,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.dao.CategorieRespository;
 
+
+import com.example.demo.dao.CategorieRespository;
+import com.example.demo.dao.ChoixRespositor;
 import com.example.demo.dao.FonctionRespository;
 import com.example.demo.dao.QuestionnaireRespository;
 import com.example.demo.dao.UserRespository;
 
 import com.example.demo.dao.TypeRespository;
 import com.example.demo.dao.QuestionsRespository;
-import com.example.demo.entities.AddQuestionnaireQuesFrom;
 import com.example.demo.entities.Categorie;
+import com.example.demo.entities.Choixreponse;
 import com.example.demo.entities.Fonction;
 import com.example.demo.entities.Questionnaire;
 import com.example.demo.entities.User;
@@ -39,6 +41,11 @@ import com.example.demo.entities.Questions;
 
 @Controller
 public class WebControlleur {
+
+@Autowired
+	private ChoixRespositor choixRespositor;
+	
+	
 
 @Autowired
 private UserRespository UserRespository;
@@ -54,6 +61,10 @@ private TypeRespository TypeRespository;
 private QuestionsRespository  questionsRespository;
 @Autowired
 private QuestionnaireRespository QuestionnaireRespository;
+
+
+
+
 // User
 
 
@@ -88,6 +99,7 @@ private QuestionnaireRespository QuestionnaireRespository;
 		 
 		 return "User";
 	 }
+
 	 
 	 
 	 @RequestMapping("User/update")
@@ -237,8 +249,29 @@ private QuestionnaireRespository QuestionnaireRespository;
 		 
 		 
 		 
+		 //Reponse
 		 
-	 
+	/*
+		 @RequestMapping("Choixreponse/add")
+		 public String crationChoixReponce(Model model) {
+			 model.addAttribute("Choixreponse",new Choixreponse() );
+			 
+			 return "crationChoixReponce";
+			 
+			 }
+			 
+
+		 @RequestMapping(value="/Choixreponse/save", method=RequestMethod.POST)
+		 public String saveReponsee(@Valid @ModelAttribute Choixreponse R, BindingResult bindingResult) {
+			if (bindingResult.hasErrors()) {
+			 return "crationChoixReponce";
+			 }
+			choixRespositor.save(R);
+			
+			return "redirect:/Choixreponse/add";
+		 
+		 }
+		*/
 		 
 		 
 		 //Type
@@ -348,7 +381,40 @@ private QuestionnaireRespository QuestionnaireRespository;
 						return "redirect:/Questions/lister";
 					}
 			 
+		
+				 
+				 
+				
+				 @RequestMapping(value="/ChoixReponseQuestion/", method = RequestMethod.GET)
+				 public String crationChoixReponce(Model model, int num) {
+					
+					 Questions q=questionsRespository.findById(num).get();
+					 model.addAttribute("Questions",q);
+					  
+					 model.addAttribute("Choixreponse",new Choixreponse() );
+					 return "crationChoixReponce";
+				 }
+				 
+				 
 
+				 @RequestMapping(value="Choixreponse/save/{num}", method=RequestMethod.POST)
+				 public String saveReponse(@PathVariable("num") int questionsId,@Valid @ModelAttribute Choixreponse R, BindingResult bindingResult) {
+					if (bindingResult.hasErrors()) {
+					 return "crationChoixReponce";
+					 }
+					 Questions q=questionsRespository.findById(questionsId).get();
+					R.setCh(q);
+					choixRespositor.save(R);
+					
+					return "redirect:/Questions/lister";
+				 
+				 }
+
+				 
+				 
+				 
+				 
+				 
 				 
 				 //QuestionnaireQuestions
 				 
@@ -382,9 +448,10 @@ private QuestionnaireRespository QuestionnaireRespository;
 				 @RequestMapping(value = "addQuestionnaireQuestions/{id}", method = RequestMethod.GET)
 				    public String addQuestions(@PathVariable("id") int questionnaireId, Model model){
 				    	model.addAttribute("Questionss", questionsRespository.findAll());
-				    
+				    	
 						model.addAttribute("Questionnaire", QuestionnaireRespository.findById(questionnaireId).get());
-				    	return "addQuestionnaireQuestions";
+						model.addAttribute("Categorie",CategorieRespository.findAll());
+						return "addQuestionnaireQuestions";
 				    }
 				    
 				    
@@ -423,21 +490,21 @@ private QuestionnaireRespository QuestionnaireRespository;
 				    	return "affUser";
 				    }
 
-				  
-	
-				 
+				
 				 
 				 @RequestMapping(value = "addUserQuestionnaire/{id}", method = RequestMethod.GET)
-				    public String addQuestionnaires(@PathVariable("id") int UserId, Model model){
+				    public String addQuestionnaire(@PathVariable("id") int UserId, Model model){
 				    	model.addAttribute("Questionnaires", QuestionnaireRespository.findAll());
 				    
 						model.addAttribute("User", UserRespository.findById(UserId).get());
 				    	return "addUserQuestionnaire";
 				    }
 				    
-				    
+				
+				
+				 
 				    @RequestMapping(value="/User/{id}/Questionnaires", method=RequestMethod.GET)
-					public String UsersAddQuestionnaires(@PathVariable int id, @RequestParam int QuestionnaireId, Model model) {
+					public String UsersAddQuestionnaire(@PathVariable int id, @RequestParam int QuestionnaireId, Model model) {
 				    	Questionnaire Questionnaire = QuestionnaireRespository.findById(QuestionnaireId).get();
 				    	User User = UserRespository.findById(id).get();
 
@@ -448,10 +515,10 @@ private QuestionnaireRespository QuestionnaireRespository;
 							UserRespository.save(User);
 							model.addAttribute("User", UserRespository.findById(id));
 							model.addAttribute("Questionnaires", QuestionnaireRespository.findAll());
-							return "redirect:/affUser";
+							return "redirect:/User/lister";
 						}
 
-						return "redirect:/affUser";
+						return "redirect:/User/lister";
 					}    
 				    
 				    @RequestMapping(value = "getUser", method = RequestMethod.GET)
@@ -460,6 +527,55 @@ private QuestionnaireRespository QuestionnaireRespository;
 				    }      
 				    
 				    
+				    
+					 @RequestMapping(value = "UserQuestionnaire/{id}", method = RequestMethod.GET)
+					    public String UserQuestionnaire(@PathVariable("id") int UserId, Model model){
+					    	
+						 model.addAttribute("Questionnaires", QuestionnaireRespository.findAll());
+						 model.addAttribute("Questions", questionsRespository.findAll());
+							model.addAttribute("Choixreponse", choixRespositor.findAll());
+					
+							model.addAttribute("User", UserRespository.findById(UserId).get());
+							
+					    	return "UserQuestionnaire";
+					    }
+					    @RequestMapping(value="/User/{id}/Reponses", method=RequestMethod.GET)
+						public String UserReponses(@PathVariable int id, @RequestParam ArrayList <Integer> ReponseId, Model model) {
+					    	List<Choixreponse> Choixreponse = choixRespositor.findAllById(ReponseId);
+					    	User User = UserRespository.findById(id).get();
+
+							if (User != null) {
+								
+								User.getReponses().addAll(Choixreponse);
+								
+								UserRespository.save(User);
+								model.addAttribute("User", UserRespository.findById(id));
+								model.addAttribute("Choixreponse", choixRespositor.findAll());
+								return "redirect:/User/{id}/done";
+							}
+
+							return "redirect:/User/{id}/done";
+						}  
+						 @RequestMapping(value="/User/{id}/done",method=RequestMethod.GET)
+						 public String doneUser(@PathVariable("id") int UserId, Model model) {
+							 
+							 User u=UserRespository.findById(UserId).get();
+							 
+							 model.addAttribute("User", u);
+							 return "done";
+						 }
+				    
+						 @RequestMapping(value = "UserReponses/{id}", method = RequestMethod.GET)
+						    public String UserReponses(@PathVariable("id") int UserId, Model model){
+						    	
+							 model.addAttribute("Questionnaires", QuestionnaireRespository.findAll());
+							 model.addAttribute("Questions", questionsRespository.findAll());
+								model.addAttribute("Choixreponse", choixRespositor.findAll());
+						
+								model.addAttribute("User", UserRespository.findById(UserId).get());
+								
+						    	return "UserRepenses";
+						    }
 				    
 				    
 				 

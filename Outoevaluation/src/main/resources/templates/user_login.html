@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>User login page</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{static/css/bootstrap.min.css}" />
+</head>
+
+<body>
+
+<div class="col-md-4">
+<p>User login page</p>
+<form name="f" action="user_login" method="POST">
+    <table>
+        <tr>
+            <td>User:</td>
+            <td><input type="text" name="username" value=""></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" name="password" /></td>
+        </tr>
+        <tr>
+            <td><input name="submit" type="submit" value="submit" /></td>
+        </tr>
+    </table>
+</form>
+</div>
+</body>
+</html>
+
+
+
+

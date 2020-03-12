@@ -29,7 +29,7 @@
     		<td th:text="${User.email_User}"></td>
     		<td th:text="${User.telephon}"></td>
     		<td>
-				<span th:each="Questionnaire,iterStat : ${User.Questionnaire}">
+				<span th:each="Questionnaire,iterStat : ${User.Questionnaires}">
 					<span th:text="${Questionnaire.titre}"/><th:block th:if="${!iterStat.last}">,</th:block>
 				</span>    		
     		</td>

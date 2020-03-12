@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Liste des User</title>
-</head>
-<body>
-<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
@@ -16,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico"/>
 
-   
+    <title>Navbar Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
@@ -38,17 +31,16 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/User/lister">liste User</a></li>
-                    <li><a href="/Questionnaire">Questionnaires</a></li>
-                    <li><a href="/Questions/lister">Questions</a></li>
-                       <li><a href="/Fonction/lister">Fonctions User</a></li>
+                    <li class="active"><a href="#">ajouter User</a></li>
+                    <li><a href="/User/lister">liste User</a></li>
+                    <li><a href="/User/Questions">liste Questions</a></li>
                     <li class="dropdown">
-                        <a  href="#"class="dropdown-toggle" data-toggle="dropdown-menu" role="button" aria-haspopup="true"
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Dropdown <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">liste User</a></li>
-                            <li><a href="#">liste Questions</a></li>
-                            <li><a href="#">liste Questionnaires</a></li>
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
                             <li><a href="#">Separated link</a></li>
@@ -58,42 +50,44 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Admin Name</a></li>
-                    <li><a href="#/">deconnextion</a></li>
+                    <li><a href="#">Static top</a></li>
+                    <li><a href="#/">Fixed top</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </nav>
     <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
+<div class="jumbotron">
 
-    <table class="table table-striped custab"> 
 
-  <thead>
-    <a href="/User/add" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new User</a>
-        <tr>
-	<th>id_User</th><th>nom_User</th><th>prenom_User</th> <th>email_User</th> <th>Telephone</th> <th>Fonction</th><th>login_User</th>  <th class="text-center">Action</th></tr>
-	</thead>
-	<tr th:each="c:${User}">
-	<td th:text="${c.id_User}"/>
-	<td th:text="${c.nom_User}"/>
-	<td th:text="${c.prenom_User}"/> 
-	<td th:text="${c.email_User}"/> 
-	<td th:text="${c.telephon}"/> 
-	 <td th:text="${c.u}"/> 
-	<td th:text="${c.login_User}"/> 
-	<td class="text-center">
-		<a  class='btn btn-info btn-xs' th:href="@{/User/update(num=${c.id_User})}"th:text="Modifier"><span class="glyphicon glyphicon-edit"></span>Modifier</a>
-	</td>
-	<td class="text-center">
-		<a class='btn btn-info btn-xs' th:href="@{/User/delete(num=${c.id_User})}" th:text="Supprimer"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>
-	</td>
-	<td class="text-center">
-	<a class='btn btn-info btn-xs'th:href="@{/addUserQuestionnaire/{id}(id=${c.id_User })}" th:text="Affecter" >Affecter</a>
-    </td>			
-	</tr>
-</table>
+
+<form th:action="@{/Choixreponse/save/{num}(num=${Questions.id_question})}"   th:object="${Choixreponse}" method="POST"  >
+   <div id="legend">
+      <legend class="">Add Reponse</legend>
+    </div> 
+   
+      
+<p>Reponse:<input type="text"  th:field="*{choix}"/><span 
+th:errors="*{choix}"/>
+   </p> 
     
+<p>Bonne Repanse 
+<input type="checkbox" id="bonne_reponse" name="gender" value="1" th:field="*{bonne_reponse}"/>
+<span 
+th:errors="*{bonne_reponse}"/>
+</p>
+    
+  
+
+
+
+ 
+
+<p><input type="submit" value="save"/> <input type="reset" value="Reset"></p>
+
+
+</form>
+    </div>
 </div> <!-- /container -->
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -101,7 +95,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-
-
 </body>
 </html>

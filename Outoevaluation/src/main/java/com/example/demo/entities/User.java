@@ -36,7 +36,7 @@ public class User implements Serializable{
 
 	private int telephon;
 
-	private int Admin=0;
+	private Integer Admin=0;
 
 	private String login_User;
 	
@@ -113,11 +113,11 @@ public class User implements Serializable{
 
 		
 		
-		public int getAdmin() {
+		public Integer getAdmin() {
 			return Admin;
 		}
 
-		public void setAdmin(int admin) {
+		public void setAdmin(Integer admin) {
 			Admin = admin;
 		}
 
@@ -133,6 +133,9 @@ public class User implements Serializable{
 		@JoinTable(name="affictation_user")
 		private Set<Questionnaire> Questionnaires=new HashSet<Questionnaire>(0);
 		
+		@ManyToMany(cascade = CascadeType.ALL)
+		@JoinTable(name="reponse_repondu")
+		private Set<Choixreponse> reponses=new HashSet<Choixreponse>(0);
 		
 		
 		@ManyToOne
@@ -159,6 +162,27 @@ public class User implements Serializable{
 				}
 			}
 			return false;
+		}
+
+		public boolean hasreponses(Choixreponse choixreponse) {
+			for (Choixreponse UserChoixreponse: getReponses()) {
+				if (UserChoixreponse.getId_choix() == choixreponse.getId_choix()) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		
+		
+		
+		
+		public Set<Choixreponse> getReponses() {
+			return reponses;
+		}
+
+		public void setReponses(Set<Choixreponse> reponses) {
+			this.reponses = reponses;
 		}
 		
 

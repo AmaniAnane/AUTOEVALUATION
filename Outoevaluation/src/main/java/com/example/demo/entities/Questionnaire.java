@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class Questionnaire implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	    public int id_questionnaire ;
-	private String date;
+	private Date date;
 	private String titre;
   
 	
@@ -51,10 +52,10 @@ public class Questionnaire implements Serializable{
 	public void setId_questionnaire(int id_questionnaire) {
 		this.id_questionnaire = id_questionnaire;
 	}
-	public String getDate() {
+	public Date  getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date  date) {
 		this.date = date;
 	}
 	
@@ -75,6 +76,7 @@ public class Questionnaire implements Serializable{
 	public void setQuestionss(Set<Questions> questionss) {
 		Questionss = questionss;
 	}
+	
 	public boolean hasQuestions(Questions questions) {
 		for (Questions QuestionnaireQuestions: getQuestionss()) {
 			if (QuestionnaireQuestions.getId_question() == questions.getId_question()) {

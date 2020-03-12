@@ -8,7 +8,7 @@
 <body>
 <table> 
 <tr>
-	<th>ID</th><th>questions</th></tr>
+	<th>ID</th><th>questions</th><th></th><th></th><th></th></tr>
 	<tr th:each="q:${Questions}">
 	<td th:text="${q.id_question}"/>
 	<td th:text="${q.libelle}"/>
@@ -19,6 +19,10 @@
 	</td>
 	<td>
 		<a th:href="@{/Questions/delete(num=${q.id_question})}"th:text="Supprime"/>
+	</td>
+	
+	<td>
+		<a th:href="@{/ChoixReponseQuestion/(num=${q.id_question })}"th:text="AddChoixReponse"/>
 	</td>
 	</tr>
 </table>

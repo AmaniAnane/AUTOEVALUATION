@@ -6755,3 +6755,45 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+div
+{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box; 
+  box-sizing: border-box;
+}
+#container
+{
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+ 
+  padding-bottom:40px;
+  overflow:hidden;
+}
+#header
+{
+  width:100%;
+  height:64px;
+}
+
+#inner
+{
+  margin:0px;
+  min-width:480px;
+  height:100%;
+
+  padding:0 0 64px 0;
+  text-align:left;
+}
+#lpane, #rpane
+{
+  display:inline-block;
+  width:49.5%;
+  height:100%;
+  margin:0px;
+  min-width:120px;
+
+  text-align:left;
+}
